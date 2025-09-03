@@ -1,13 +1,18 @@
-name: my_first_worlflow
+name: my_first_workflow   #this is the name of the workflow
 
-on:
+on:    #root keyword that triggers workflow
   push:
     branches:
       - main
-jobs:
-  job_one:
+jobs:  # Top-level job section
+  job_one:  # job id and must be unique across the entire workflow
+    runs-on: ubuntu-latest #is the environment on which the job will be executed
+    steps: 
+      - uses: actions/checkout@v4 #the uses keyword calls for an already existing action
+      - name: greeting # human-readable name to highlight what the step is about
+        run: echo "Hello Stranger, Welcome to my world" #run keyword executes the shell commands
+  job_two:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: greeting
-        run: echo "Hello Stranger, Welcome to my world"
+      - name: goodbye
+        run: echo "Thank you for coming. Goodbye"
