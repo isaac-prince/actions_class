@@ -17,11 +17,13 @@ jobs:                                                         # Top-level job se
         
       - name: get_output
         id: get_output
-        run: echo "msg=Name Please" >> "$GITHUB_OUTPUT"
+        run: |
+          echo "msg=Name Please" >> "$GITHUB_OUTPUT"
   
   job_two:
     needs: job_one
     runs-on: ubuntu-latest
     steps:
       - name: goodbye
-        run: echo "Message from job one: '${{ needs.job_one.outputs.ask }}'"
+        run:  |
+          echo "Message from job one: '${{ needs.job_one.outputs.ask }}'"
