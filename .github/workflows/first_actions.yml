@@ -4,17 +4,24 @@ on:    #root keyword that triggers workflow
   push:
     branches:
       - main
-jobs:  # Top-level job section
-  job_one:  # job id and must be unique across the entire workflow
-    runs-on: ubuntu-latest #is the environment on which the job will be executed
+jobs:                                                         # Top-level job section
+  job_one:                                                   # job id and must be unique across the entire workflow
+    runs-on: ubuntu-latest                                      #is the environment on which the job will be executed
+    outputs:
+      ask: ${{steps.get_output.outputs.msg}}
     steps: 
-      - uses: actions/checkout@v4 #the uses keyword calls for an already existing action
-      - name: greeting # human-readable name to highlight what the step is about
-        run: echo "Hello Stranger, Welcome to my world" #run keyword executes the shell commands
+      - uses: actions/checkout@v4                              #the uses keyword calls for an already existing action
+     
+      - name: greeting                                          # human-readable name to highlight what the step is about 
+        run: echo "Hello Stranger, Welcome to my world"         #run keyword executes the shell commands
+        
+      - name: get_output
+        id: get_output
+        run: echo "msg=Name Please" >> "$GITHUB_OUTPUT"
   
   job_two:
     needs: job_one
     runs-on: ubuntu-latest
     steps:
       - name: goodbye
-        run: echo "Thank you for coming. Goodbye"
+        run: echo "Message from job one: '${{ needs.job_one.outputs.ask }}'"
