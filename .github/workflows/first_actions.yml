@@ -11,7 +11,9 @@ jobs:  # Top-level job section
       - uses: actions/checkout@v4 #the uses keyword calls for an already existing action
       - name: greeting # human-readable name to highlight what the step is about
         run: echo "Hello Stranger, Welcome to my world" #run keyword executes the shell commands
+  
   job_two:
+    needs: job_one
     runs-on: ubuntu-latest
     steps:
       - name: goodbye
