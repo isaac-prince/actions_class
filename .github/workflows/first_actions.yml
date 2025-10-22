@@ -4,6 +4,7 @@ on:    #root keyword that triggers workflow
   push:
     branches:
       - main
+  workflow_dispatch:                     #adds a button to the UI that lets you execute the owrkflow
 jobs:                                                         # Top-level job section
   job_one:                                                   # job id and must be unique across the entire workflow
     runs-on: ubuntu-latest                                      #is the environment on which the job will be executed
